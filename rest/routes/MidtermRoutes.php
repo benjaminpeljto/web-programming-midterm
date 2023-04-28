@@ -27,7 +27,9 @@ Flight::route('POST /cap-table-record', function(){
     * Example output is given in figure 3
     * This endpoint should return output in JSON format
     */
-    
+    $data = Flight::request()->data->getData();
+    $response = Flight::midtermService()->add_cap_table_record($data);
+    Flight::json($response);
 });
 
 
@@ -46,6 +48,8 @@ Flight::route("DELETE /investor/@id", function($id){
     * Endpoint should return the message whether investor has been deleted
     * This endpoint should return output in JSON format
     */
+    Flight::midtermService()->delete_investor($id);
+    Flight::json(['message'=>'User by id ' . $id . ' has been deleted.']);
 });
 
 ?>

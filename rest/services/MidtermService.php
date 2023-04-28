@@ -18,8 +18,8 @@ class MidtermService {
     /** TODO
     * Implement service method to add cap table record
     */
-    public function add_cap_table_record(){
-
+    public function add_cap_table_record($data){
+        return $this->dao->add_cap_table_record($data);
     }
 
     /** TODO
@@ -33,7 +33,7 @@ class MidtermService {
     * Implement service method to delete investor
     */
     public function delete_investor($id){
-
+        $this->dao->delete_investor($id);
     }
 }
 ?>

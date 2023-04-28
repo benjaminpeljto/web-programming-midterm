@@ -61,7 +61,12 @@ class MidtermDao {
     /** TODO
     * Implement DAO method used to add cap table record
     */
-    public function add_cap_table_record(){
+    public function add_cap_table_record($record){
+      $stmt = $this->conn->prepare("INSERT INTO cap_table (share_class_id, share_class_category_id, investor_id, diluted_shares) VALUES
+      (:share_class_id, :share_class_category_id, :investor_id, :diluted_shares);");
+      $stmt->execute($record);
+      $record['id'] = $this->conn->lastInsertId();
+      return $record;
 
     }
 
@@ -82,7 +87,9 @@ class MidtermDao {
     * Implement DAO method to delete investor
     */
     public function delete_investor($id){
-
+      $stmt = $this->conn->prepare("DELETE FROM investors WHERE id = :id");
+      $stmt->bindParam(":id",$id); //prevents an SQL injection
+      $stmt->execute();
     }
 }
 ?>
