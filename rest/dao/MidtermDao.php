@@ -74,7 +74,7 @@ class MidtermDao {
     * Implement DAO method to return list of categories with total shares amount
     */
     public function categories(){
-      $stmt = $this->conn->prepare("SELECT scc.description as category, SUM(ct.diluted_shares) as total_shares
+      $stmt = $this->conn->prepare("SELECT scc.description as category, FLOOR(SUM(ct.diluted_shares)) as total_shares
       FROM cap_table ct
       JOIN share_class_categories scc
       ON ct.share_class_category_id = scc.id
